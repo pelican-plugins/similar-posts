@@ -84,7 +84,7 @@ documentation.
 
 Before using it, also install the required libraries::
 
-    pip install -r similar_posts/requirements.txt
+    pip install -r requirements.txt
 
 By default, up to 5 articles are listed. You may customize this value by
 defining ``SIMILAR_POSTS_MAX_COUNT`` in your settings file, e.g.::
