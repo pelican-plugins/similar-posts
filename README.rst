@@ -57,7 +57,7 @@ Comparison with the Related Posts plugin
 
 The `Related Posts plugin
 <https://github.com/getpelican/pelican-plugins/tree/master/related_posts>`_
-relates articles that have the greater number of tags in common, without any
+relates articles that have the greatest number of tags in common, without any
 tag weighting. If many articles match with the same number of tags, they all
 get the same score. On most websites, the list of recommended articles is
 short, so the most relevant ones will often be left out if all have the same
