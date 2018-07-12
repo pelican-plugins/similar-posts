@@ -90,15 +90,16 @@ Before using it, also install the required libraries::
     pip install -r requirements.txt
 
 By default, up to 5 articles are listed. You may customize this value by
-defining ``SIMILAR_POSTS_MAX_COUNT`` in your settings file, e.g.::
+defining ``SIMILAR_POSTS_MAX_COUNT`` in your Pelican settings file, e.g.::
 
     SIMILAR_POSTS_MAX_COUNT = 10
 
 You may also define ``SIMILAR_POSTS_MIN_SCORE`` in the settings file. It
 defaults to .0001. A value of 1.0 would restrict the list of similar posts to
-articles that share the same list of tags. Any value in between could act as a
-similarity threshold, but you'll probably have to find the proper value
-empirically.
+articles that have the same set of tags. Any value greater than 0.0 acts as a
+similarity threshold, but to play with this you'll probably have to find a
+proper value empirically. When running Pelican with the ``--debug`` option,
+extra messages show the scores of the similar posts.
 
 You can output the ``similar_posts`` variable in your article template. This
 might look like the following:
