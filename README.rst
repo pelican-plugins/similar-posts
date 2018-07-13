@@ -1,6 +1,12 @@
 Similar Posts Plugin for Pelican
 ================================
 
+.. image:: https://travis-ci.org/davidlesieur/similar_posts.svg?branch=ci
+    :target: https://travis-ci.org/davidlesieur/similar_posts
+
+.. image:: https://codecov.io/gh/davidlesieur/similar_posts/branch/ci/graph/badge.svg
+    :target: https://codecov.io/gh/davidlesieur/similar_posts
+
 This `Pelican <https://getpelican.com>`_ plugin adds the ``similar_posts``
 variable to every published article's context.
 

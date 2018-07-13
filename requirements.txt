@@ -1,1 +1,2 @@
 gensim>=3.5.0
+pelican
