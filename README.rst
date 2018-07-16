@@ -1,10 +1,10 @@
 Similar Posts Plugin for Pelican
 ================================
 
-.. image:: https://travis-ci.org/davidlesieur/similar_posts.svg?branch=ci
+.. image:: https://travis-ci.org/davidlesieur/similar_posts.svg?branch=master
     :target: https://travis-ci.org/davidlesieur/similar_posts
 
-.. image:: https://codecov.io/gh/davidlesieur/similar_posts/branch/ci/graph/badge.svg
+.. image:: https://codecov.io/gh/davidlesieur/similar_posts/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/davidlesieur/similar_posts
 
 This `Pelican <https://getpelican.com>`_ plugin adds the ``similar_posts``
