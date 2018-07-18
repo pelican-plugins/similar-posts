@@ -52,8 +52,8 @@ def add_similar_posts(generator):
     sim = similarities.MatrixSimilarity(tfidf[corpus], num_features=num_features)
 
     for i, (article, scores) in enumerate(zip(generator.articles, sim)):
-        # Obviously, article is similar to itself. Take it away.
-        scores[i] = -1
+        # Obviously, article is similar to itself. Exclude it.
+        scores[i] = min_score - 1
 
         # Build (document index, score) tuples, sorted by score, then by date.
         selected = sorted(
