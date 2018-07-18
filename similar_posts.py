@@ -40,9 +40,9 @@ def add_similar_posts(generator):
 
     # Transform the vectors to tf*idf values. Here we use the same tf*idf
     # formula as Lucene's TFIDFSimilarity class, instead of Gensim's default
-    # formula, to better handle edge cases (e.g. when all documents have the
-    # same terms, df == D, which means log(D/df) == log(1) == 0, which would
-    # imply no similarity!).
+    # formula. Gensim's default idf = log2(D/df) does not handle some edge
+    # cases very well, for example when all documents have the same terms
+    # (because log2(D/df) == log2(1) == 0, which implies no similarity!)
     tfidf = models.TfidfModel(
         corpus, normalize=True,
         wlocal=lambda tf: tf ** .5,
