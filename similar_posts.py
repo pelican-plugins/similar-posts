@@ -9,8 +9,6 @@ import math
 import os
 
 from pelican import signals
-from itertools import chain
-
 from gensim import corpora, models, similarities
 
 logger = logging.getLogger(__name__)
