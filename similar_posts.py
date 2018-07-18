@@ -49,23 +49,23 @@ def add_similar_posts(generator):
         wglobal=lambda df, D: (1 + math.log((D + 1) / (df + 1))) ** 2)
 
     # Compute the cosine similarity of every document pair.
-    index = similarities.MatrixSimilarity(tfidf[corpus], num_features=num_features)
+    sim = similarities.MatrixSimilarity(tfidf[corpus], num_features=num_features)
 
-    for i, (article, scores) in enumerate(zip(generator.articles, index)):
+    for i, (article, scores) in enumerate(zip(generator.articles, sim)):
         # Obviously, article is similar to itself. Take it away.
         scores[i] = -1
 
-        # Build (article index, score) tuples, sorted by score, then by date.
-        similar = sorted(
-            [item for item in enumerate(scores) if item[1] >= min_score],
-            key=lambda item: (item[1], generator.articles[item[0]].date),
+        # Build (document index, score) tuples, sorted by score, then by date.
+        selected = sorted(
+            [(idx, score) for idx, score in enumerate(scores) if score >= min_score],
+            key=lambda idx_score: (idx_score[1], generator.articles[idx_score[0]].date),
             reverse=True)[:max_count]
 
-        article.similar_posts = [generator.articles[item[0]] for item in similar]
+        article.similar_posts = [generator.articles[idx] for idx, _ in selected]
 
         logger.debug('{article}: similar_posts scores: {scores}'.format(
             article=os.path.basename(article.source_path) if hasattr(article, 'source_path') else i,
-            scores=[item[1] for item in similar]))
+            scores=[score for _, score in selected]))
 
 def register():
     signals.article_generator_finalized.connect(add_similar_posts)
