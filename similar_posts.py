@@ -38,15 +38,15 @@ def add_similar_posts(generator):
     corpus = [dictionary.doc2bow(doc) for doc in docs]
     del docs
 
-    # Transform the vectors to tf*idf values. Here we use a tf*idf formula
-    # inspired by Lucene's TFIDFSimilarity class, instead of Gensim's default
+    # Transform the vectors to tf*idf values. Here we use the same tf*idf
+    # formula as Lucene's TFIDFSimilarity class, instead of Gensim's default
     # formula, to better handle edge cases (e.g. when all documents have the
     # same terms, df == D, which means log(D/df) == log(1) == 0, which would
     # imply no similarity!).
     tfidf = models.TfidfModel(
         corpus, normalize=True,
         wlocal=lambda tf: tf ** .5,
-        wglobal=lambda df, D: .5 + math.log((D + 1) / (df + 1)))
+        wglobal=lambda df, D: (1 + math.log((D + 1) / (df + 1))) ** 2)
 
     # Compute the cosine similarity of every document pair.
     index = similarities.MatrixSimilarity(tfidf[corpus], num_features=num_features)
