@@ -26,7 +26,7 @@ class PseudoArticle():
             self.date = datetime.datetime(1970, 1, 1)
 
     def __repr__(self):
-        return f'{self.__class__.__name__}({[t.name for t in self.tags]!r})'
+        return '{}({})'.format(self.__class__.__name__, repr([t.name for t in self.tags]))
 
 
 class NoArticlesTestCase(unittest.TestCase):
