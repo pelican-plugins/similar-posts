@@ -119,3 +119,12 @@ might look like the following:
         {% endfor %}
         </ul>
     {% endif %}
+
+
+Running the tests
+-----------------
+
+Tests use the `unittest <https://docs.python.org/3/library/unittest.html>`__
+framework and may be run with the following command::
+
+    python -m unittest -v test_similar_posts
