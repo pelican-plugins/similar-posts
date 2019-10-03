@@ -77,7 +77,7 @@ posts will not link to newer ones, unless they are manually edited to add them.
 Requirements
 ------------
 
-This plugin has been tested on Python 3.6.
+This plugin has been tested on Python 3.6 and 3.7.
 
 It depends on `Gensim <https://radimrehurek.com/gensim/index.html>`_, which has
 its own dependencies such as `NumPy <http://www.numpy.org/>`_, `SciPy
