@@ -22,7 +22,7 @@ repos:
     hooks:
       - id: flake8
         args: [--max-line-length=88]
-        language_version: python3.7
+        language_version: python3.6
 
   - repo: https://github.com/timothycrosley/isort
     rev: 5.4.2

@@ -8,18 +8,20 @@ import logging
 import math
 import os
 
-from pelican import signals
 from gensim import corpora, models, similarities
+
+from pelican import signals
 
 logger = logging.getLogger(__name__)
 
+
 def add_similar_posts(generator):
-    max_count = generator.settings.get('SIMILAR_POSTS_MAX_COUNT', 5)
-    min_score = generator.settings.get('SIMILAR_POSTS_MIN_SCORE', .0001)
+    max_count = generator.settings.get("SIMILAR_POSTS_MAX_COUNT", 5)
+    min_score = generator.settings.get("SIMILAR_POSTS_MIN_SCORE", 0.0001)
 
     # Collect all documents. A document gets represented by a list of tags.
     docs = [
-        [tag.name for tag in article.tags] if hasattr(article, 'tags') else []
+        [tag.name for tag in article.tags] if hasattr(article, "tags") else []
         for article in generator.articles
     ]
 
@@ -44,9 +46,11 @@ def add_similar_posts(generator):
     # cases very well, for example when all documents have the same terms
     # (because log2(D/df) == log2(1) == 0, which implies no similarity!)
     tfidf = models.TfidfModel(
-        corpus, normalize=True,
-        wlocal=lambda tf: tf ** .5,
-        wglobal=lambda df, D: (1 + math.log((D + 1) / (df + 1))) ** 2)
+        corpus,
+        normalize=True,
+        wlocal=lambda tf: tf ** 0.5,
+        wglobal=lambda df, D: (1 + math.log((D + 1) / (df + 1))) ** 2,
+    )
 
     # Compute the cosine similarity of every document pair.
     sim = similarities.MatrixSimilarity(tfidf[corpus], num_features=num_features)
@@ -59,13 +63,20 @@ def add_similar_posts(generator):
         selected = sorted(
             [(idx, score) for idx, score in enumerate(scores) if score >= min_score],
             key=lambda idx_score: (idx_score[1], generator.articles[idx_score[0]].date),
-            reverse=True)[:max_count]
+            reverse=True,
+        )[:max_count]
 
         article.similar_posts = [generator.articles[idx] for idx, _ in selected]
 
-        logger.debug('{article}: similar_posts scores: {scores}'.format(
-            article=os.path.basename(article.source_path) if hasattr(article, 'source_path') else i,
-            scores=[score for _, score in selected]))
+        logger.debug(
+            "{article}: similar_posts scores: {scores}".format(
+                article=os.path.basename(article.source_path)
+                if hasattr(article, "source_path")
+                else i,
+                scores=[score for _, score in selected],
+            )
+        )
+
 
 def register():
     signals.article_generator_finalized.connect(add_similar_posts)

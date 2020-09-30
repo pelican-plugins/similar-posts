@@ -1,11 +1,12 @@
 import datetime
 import unittest
-from pelican.urlwrappers import Tag
 
 from similar_posts import add_similar_posts
 
+from pelican.urlwrappers import Tag
 
-class PseudoArticlesGenerator():
+
+class PseudoArticlesGenerator:
     """A fake Generator, with just the attributes that are actually needed by the plugin."""
 
     def __init__(self, settings=None, articles=None):
@@ -13,7 +14,7 @@ class PseudoArticlesGenerator():
         self.articles = articles or []
 
 
-class PseudoArticle():
+class PseudoArticle:
     """A fake Article, with just the attributes that are actually needed by the plugin."""
 
     def __init__(self, tag_names=None, date=()):
@@ -26,7 +27,7 @@ class PseudoArticle():
             self.date = datetime.datetime(1970, 1, 1)
 
     def __repr__(self):
-        return f'{self.__class__.__name__}({[t.name for t in self.tags]!r})'
+        return f"{self.__class__.__name__}({[t.name for t in self.tags]!r})"
 
 
 class NoArticlesTestCase(unittest.TestCase):
@@ -45,7 +46,8 @@ class SingleArticleTestCase(unittest.TestCase):
 
     def setUp(self):
         self.generator = PseudoArticlesGenerator(
-            articles=[PseudoArticle(['tag1', 'tag2'])])
+            articles=[PseudoArticle(["tag1", "tag2"])]
+        )
         add_similar_posts(self.generator)
 
     def test_no_similar(self):
@@ -57,7 +59,8 @@ class NoTagsTestCase(unittest.TestCase):
 
     def setUp(self):
         self.generator = PseudoArticlesGenerator(
-            articles=[PseudoArticle(), PseudoArticle(), PseudoArticle()])
+            articles=[PseudoArticle(), PseudoArticle(), PseudoArticle()]
+        )
         add_similar_posts(self.generator)
 
     def test_no_tags(self):
@@ -73,29 +76,26 @@ class IdenticalTagsTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_content = [
-            PseudoArticle(['common']),  # 0
-            PseudoArticle(['common']),  # 1
-            PseudoArticle(['common']),  # 2
+            PseudoArticle(["common"]),  # 0
+            PseudoArticle(["common"]),  # 1
+            PseudoArticle(["common"]),  # 2
         ]
         self.generator = PseudoArticlesGenerator(articles=self.test_content)
         add_similar_posts(self.generator)
 
     def test_identical(self):
-        self.assertTrue(set(self.generator.articles[0].similar_posts) ==
-            {
-                self.test_content[1],
-                self.test_content[2],
-            })
-        self.assertTrue(set(self.generator.articles[1].similar_posts) ==
-            {
-                self.test_content[0],
-                self.test_content[2],
-            })
-        self.assertTrue(set(self.generator.articles[2].similar_posts) ==
-            {
-                self.test_content[0],
-                self.test_content[1],
-            })
+        self.assertTrue(
+            set(self.generator.articles[0].similar_posts)
+            == {self.test_content[1], self.test_content[2]}
+        )
+        self.assertTrue(
+            set(self.generator.articles[1].similar_posts)
+            == {self.test_content[0], self.test_content[2]}
+        )
+        self.assertTrue(
+            set(self.generator.articles[2].similar_posts)
+            == {self.test_content[0], self.test_content[1]}
+        )
 
 
 class CommonTagTestCase(unittest.TestCase):
@@ -107,29 +107,26 @@ class CommonTagTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_content = [
-            PseudoArticle(['common', 'unique1']),  # 0
-            PseudoArticle(['common', 'unique2']),  # 1
-            PseudoArticle(['common', 'unique3']),  # 2
+            PseudoArticle(["common", "unique1"]),  # 0
+            PseudoArticle(["common", "unique2"]),  # 1
+            PseudoArticle(["common", "unique3"]),  # 2
         ]
         self.generator = PseudoArticlesGenerator(articles=self.test_content)
         add_similar_posts(self.generator)
 
     def test_common(self):
-        self.assertTrue(set(self.generator.articles[0].similar_posts) ==
-            {
-                self.test_content[1],
-                self.test_content[2],
-            })
-        self.assertTrue(set(self.generator.articles[1].similar_posts) ==
-            {
-                self.test_content[0],
-                self.test_content[2],
-            })
-        self.assertTrue(set(self.generator.articles[2].similar_posts) ==
-            {
-                self.test_content[0],
-                self.test_content[1],
-            })
+        self.assertTrue(
+            set(self.generator.articles[0].similar_posts)
+            == {self.test_content[1], self.test_content[2]}
+        )
+        self.assertTrue(
+            set(self.generator.articles[1].similar_posts)
+            == {self.test_content[0], self.test_content[2]}
+        )
+        self.assertTrue(
+            set(self.generator.articles[2].similar_posts)
+            == {self.test_content[0], self.test_content[1]}
+        )
 
 
 class UniqueTestCase(unittest.TestCase):
@@ -139,10 +136,11 @@ class UniqueTestCase(unittest.TestCase):
         self.generator = PseudoArticlesGenerator(
             articles=[
                 PseudoArticle(),
-                PseudoArticle(['unique1']),
-                PseudoArticle(['unique2', 'unique3']),
-                PseudoArticle(['unique4', 'unique5', 'unique6']),
-            ])
+                PseudoArticle(["unique1"]),
+                PseudoArticle(["unique2", "unique3"]),
+                PseudoArticle(["unique4", "unique5", "unique6"]),
+            ]
+        )
         add_similar_posts(self.generator)
 
     def test_unique(self):
@@ -155,57 +153,68 @@ class SimilarityTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_content = [
-            PseudoArticle(['common1']),                        # 0
-            PseudoArticle(['common2']),                        # 1
-            PseudoArticle(['common2', 'common1']),             # 2
-            PseudoArticle(['common2', 'unique1']),             # 3
-            PseudoArticle(['unique2', 'unique3']),             # 4
-            PseudoArticle(['common2', 'unique4', 'unique5']),  # 5
-            PseudoArticle(['common2']),                        # 6
+            PseudoArticle(["common1"]),  # 0
+            PseudoArticle(["common2"]),  # 1
+            PseudoArticle(["common2", "common1"]),  # 2
+            PseudoArticle(["common2", "unique1"]),  # 3
+            PseudoArticle(["unique2", "unique3"]),  # 4
+            PseudoArticle(["common2", "unique4", "unique5"]),  # 5
+            PseudoArticle(["common2"]),  # 6
         ]
         self.generator = PseudoArticlesGenerator(articles=self.test_content)
         add_similar_posts(self.generator)
 
     def test_similar_posts(self):
-        self.assertTrue(set(self.generator.articles[0].similar_posts) ==
-            {self.test_content[2]})
-        self.assertTrue(set(self.generator.articles[1].similar_posts) ==
-            {
+        self.assertTrue(
+            set(self.generator.articles[0].similar_posts) == {self.test_content[2]}
+        )
+        self.assertTrue(
+            set(self.generator.articles[1].similar_posts)
+            == {
                 self.test_content[2],
                 self.test_content[3],
                 self.test_content[5],
                 self.test_content[6],
-            })
-        self.assertTrue(set(self.generator.articles[2].similar_posts) ==
-            {
+            }
+        )
+        self.assertTrue(
+            set(self.generator.articles[2].similar_posts)
+            == {
                 self.test_content[0],
                 self.test_content[1],
                 self.test_content[3],
                 self.test_content[5],
                 self.test_content[6],
-            })
-        self.assertTrue(set(self.generator.articles[3].similar_posts) ==
-            {
+            }
+        )
+        self.assertTrue(
+            set(self.generator.articles[3].similar_posts)
+            == {
                 self.test_content[1],
                 self.test_content[2],
                 self.test_content[5],
                 self.test_content[6],
-            })
+            }
+        )
         self.assertFalse(self.generator.articles[4].similar_posts)
-        self.assertTrue(set(self.generator.articles[5].similar_posts) ==
-            {
+        self.assertTrue(
+            set(self.generator.articles[5].similar_posts)
+            == {
                 self.test_content[1],
                 self.test_content[2],
                 self.test_content[3],
                 self.test_content[6],
-            })
-        self.assertTrue(set(self.generator.articles[6].similar_posts) ==
-            {
+            }
+        )
+        self.assertTrue(
+            set(self.generator.articles[6].similar_posts)
+            == {
                 self.test_content[1],
                 self.test_content[2],
                 self.test_content[3],
                 self.test_content[5],
-            })
+            }
+        )
 
 
 class MaxCountSettingTestCase(unittest.TestCase):
@@ -213,13 +222,14 @@ class MaxCountSettingTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_content = [
-            PseudoArticle(['common']),
-            PseudoArticle(['common']),
-            PseudoArticle(['common']),
-            PseudoArticle(['common']),
+            PseudoArticle(["common"]),
+            PseudoArticle(["common"]),
+            PseudoArticle(["common"]),
+            PseudoArticle(["common"]),
         ]
         self.generator = PseudoArticlesGenerator(
-            articles=self.test_content, settings={'SIMILAR_POSTS_MAX_COUNT': 2})
+            articles=self.test_content, settings={"SIMILAR_POSTS_MAX_COUNT": 2}
+        )
         add_similar_posts(self.generator)
 
     def test_max_count(self):
@@ -232,13 +242,14 @@ class MinScoreSettingTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_content = [
-            PseudoArticle(['common1']),            # 0
-            PseudoArticle(['common1', 'unique']),  # 1
-            PseudoArticle(['common2']),            # 2
-            PseudoArticle(['common2']),            # 3
+            PseudoArticle(["common1"]),  # 0
+            PseudoArticle(["common1", "unique"]),  # 1
+            PseudoArticle(["common2"]),  # 2
+            PseudoArticle(["common2"]),  # 3
         ]
         self.generator = PseudoArticlesGenerator(
-            articles=self.test_content, settings={'SIMILAR_POSTS_MIN_SCORE': 1.0})
+            articles=self.test_content, settings={"SIMILAR_POSTS_MIN_SCORE": 1.0}
+        )
         add_similar_posts(self.generator)
 
     def test_not_similar_enough(self):
@@ -246,10 +257,12 @@ class MinScoreSettingTestCase(unittest.TestCase):
         self.assertFalse(self.generator.articles[1].similar_posts)
 
     def test_identical(self):
-        self.assertTrue(set(self.generator.articles[2].similar_posts) ==
-            {self.test_content[3]})
-        self.assertTrue(set(self.generator.articles[3].similar_posts) ==
-            {self.test_content[2]})
+        self.assertTrue(
+            set(self.generator.articles[2].similar_posts) == {self.test_content[3]}
+        )
+        self.assertTrue(
+            set(self.generator.articles[3].similar_posts) == {self.test_content[2]}
+        )
 
 
 class OrderingTestCase(unittest.TestCase):
@@ -257,45 +270,40 @@ class OrderingTestCase(unittest.TestCase):
 
     def setUp(self):
         self.test_content = [
-            PseudoArticle(['common1', 'unique1', 'unique2']),  # 0
-            PseudoArticle(['common1', 'common2', 'unique3']),  # 1
-            PseudoArticle(['common1', 'common2', 'unique4']),  # 2
-            PseudoArticle(['common3'], (2016,1,1)),            # 3
-            PseudoArticle(['common3'], (2018,1,1)),            # 4
-            PseudoArticle(['common3'], (2017,1,1)),            # 5
+            PseudoArticle(["common1", "unique1", "unique2"]),  # 0
+            PseudoArticle(["common1", "common2", "unique3"]),  # 1
+            PseudoArticle(["common1", "common2", "unique4"]),  # 2
+            PseudoArticle(["common3"], (2016, 1, 1)),  # 3
+            PseudoArticle(["common3"], (2018, 1, 1)),  # 4
+            PseudoArticle(["common3"], (2017, 1, 1)),  # 5
         ]
         self.generator = PseudoArticlesGenerator(articles=self.test_content)
         add_similar_posts(self.generator)
 
     def test_score_ordering(self):
-        self.assertTrue(self.generator.articles[1].similar_posts ==
-            [
-                self.test_content[2],
-                self.test_content[0],
-            ])
-        self.assertTrue(self.generator.articles[2].similar_posts ==
-            [
-                self.test_content[1],
-                self.test_content[0],
-            ])
+        self.assertTrue(
+            self.generator.articles[1].similar_posts
+            == [self.test_content[2], self.test_content[0]]
+        )
+        self.assertTrue(
+            self.generator.articles[2].similar_posts
+            == [self.test_content[1], self.test_content[0]]
+        )
 
     def test_date_ordering(self):
-        self.assertTrue(self.generator.articles[3].similar_posts ==
-            [
-                self.test_content[4],
-                self.test_content[5],
-            ])
-        self.assertTrue(self.generator.articles[4].similar_posts ==
-            [
-                self.test_content[5],
-                self.test_content[3],
-            ])
-        self.assertTrue(self.generator.articles[5].similar_posts ==
-            [
-                self.test_content[4],
-                self.test_content[3],
-            ])
+        self.assertTrue(
+            self.generator.articles[3].similar_posts
+            == [self.test_content[4], self.test_content[5]]
+        )
+        self.assertTrue(
+            self.generator.articles[4].similar_posts
+            == [self.test_content[5], self.test_content[3]]
+        )
+        self.assertTrue(
+            self.generator.articles[5].similar_posts
+            == [self.test_content[4], self.test_content[3]]
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
