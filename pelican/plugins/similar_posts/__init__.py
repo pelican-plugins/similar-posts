@@ -1,1 +1,1 @@
-from .similar_posts import *
+from .similar_posts import *  # NOQA
