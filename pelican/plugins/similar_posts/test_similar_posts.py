@@ -1,9 +1,8 @@
 import datetime
 import unittest
 
-from similar_posts import add_similar_posts
-
 from pelican.urlwrappers import Tag
+from similar_posts import add_similar_posts
 
 
 class PseudoArticlesGenerator:
