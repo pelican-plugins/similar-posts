@@ -1,7 +1,7 @@
 Similar Posts: A Plugin for Pelican
 ===================================
 
-[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/similar-posts/build)](https://github.com/pelican-plugins/similar-posts/actions) [![PyPI Version](https://img.shields.io/pypi/v/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/) [![Coverage Status](https://codecov.io/gh/davidlesieur/similar_posts/branch/master/graph/badge.svg)](https://codecov.io/gh/davidlesieur/similar_posts)
+[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/similar-posts/build)](https://github.com/pelican-plugins/similar-posts/actions) [![PyPI Version](https://img.shields.io/pypi/v/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/)
 
 **Similar Posts** is a Pelican plugin that adds the `similar_posts` variable to every published article's context.
 
