@@ -6,7 +6,7 @@ from similar_posts import add_similar_posts
 
 
 class PseudoArticlesGenerator:
-    """A fake Generator, with just the attributes that are actually needed by the plugin."""
+    """A fake Generator, with just the attributes that are needed by the plugin."""
 
     def __init__(self, settings=None, articles=None):
         self.settings = settings or {}
@@ -14,7 +14,7 @@ class PseudoArticlesGenerator:
 
 
 class PseudoArticle:
-    """A fake Article, with just the attributes that are actually needed by the plugin."""
+    """A fake Article, with just the attributes that are needed by the plugin."""
 
     def __init__(self, tag_names=None, date=()):
         if tag_names:
