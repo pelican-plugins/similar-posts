@@ -3,7 +3,7 @@ Similar Posts: A Plugin for Pelican
 
 [![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/similar-posts/build)](https://github.com/pelican-plugins/similar-posts/actions) [![PyPI Version](https://img.shields.io/pypi/v/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/)
 
-**Similar Posts** is a Pelican plugin that adds the `similar_posts` variable to every published article's context.
+**Similar Posts** is a [Pelican](https://getpelican.com/) plugin that adds the `similar_posts` variable to every published article's context.
 
 The inputs to the similarity measurement algorithm are article tags. Thus, for this plugin to be of any use, at least some of your articles must have a `tags` element in their [metadata](http://docs.getpelican.com/en/stable/content.html#file-metadata).
 
