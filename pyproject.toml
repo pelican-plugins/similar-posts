@@ -55,7 +55,7 @@ markdown = ["markdown"]
 [tool.autopub]
 project-name = "Similar Posts"
 git-username = "botpub"
-git-email = "botpub@autopub.rocks"
+git-email = "52496925+botpub@users.noreply.github.com"
 
 [tool.isort]
 # Maintain compatibility with Black
