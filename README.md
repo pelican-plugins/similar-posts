@@ -1,7 +1,9 @@
 Similar Posts: A Plugin for Pelican
 ===================================
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/similar-posts/main.yml?branch=main)](https://github.com/pelican-plugins/similar-posts/actions) [![PyPI Version](https://img.shields.io/pypi/v/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/similar-posts/main.yml?branch=main)](https://github.com/pelican-plugins/similar-posts/actions)
+[![PyPI Version](https://img.shields.io/pypi/v/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/)
+![License](https://img.shields.io/pypi/l/pelican-markdown-include?color=blue)
 
 **Similar Posts** is a [Pelican](https://getpelican.com/) plugin that adds the `similar_posts` variable to every published article's context.
 
@@ -23,7 +25,7 @@ This plugin can be installed via:
 
 ```shell
 python -m pip install pelican-similar-posts
-```
+As long as you have not explicitly added a `PLUGINS` setting to your Pelican settings file, then the newly-installed plugin should be automatically detected and enabled. Otherwise, you must add `similar_posts` to your existing `PLUGINS` list. For more information, please see the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
 
 Configuration
 -------------
