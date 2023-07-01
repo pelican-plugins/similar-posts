@@ -48,7 +48,7 @@ def add_similar_posts(generator):
     tfidf = models.TfidfModel(
         corpus,
         normalize=True,
-        wlocal=lambda tf: tf ** 0.5,
+        wlocal=lambda tf: tf**0.5,
         wglobal=lambda df, D: (1 + math.log((D + 1) / (df + 1))) ** 2,
     )
 
