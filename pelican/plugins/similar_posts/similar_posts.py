@@ -70,9 +70,11 @@ def add_similar_posts(generator):
 
         logger.debug(
             "{article}: similar_posts scores: {scores}".format(
-                article=os.path.basename(article.source_path)
-                if hasattr(article, "source_path")
-                else i,
+                article=(
+                    os.path.basename(article.source_path)
+                    if hasattr(article, "source_path")
+                    else i
+                ),
                 scores=[score for _, score in selected],
             )
         )
