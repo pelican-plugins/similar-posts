@@ -67,8 +67,7 @@ class NoTagsTestCase(unittest.TestCase):
 
 
 class IdenticalTagsTestCase(unittest.TestCase):
-    """
-    Test a generator whose articles all have the same tags.
+    """Test a generator whose articles all have the same tags.
 
     Some TF*IDF formulas would cause this test to fail.
     """
@@ -98,8 +97,7 @@ class IdenticalTagsTestCase(unittest.TestCase):
 
 
 class CommonTagTestCase(unittest.TestCase):
-    """
-    Test a generator whose articles all have one of the tags in common.
+    """Test a generator whose articles all have one of the tags in common.
 
     Some TF*IDF formulas would cause this test to fail.
     """
@@ -232,8 +230,9 @@ class MaxCountSettingTestCase(unittest.TestCase):
         add_similar_posts(self.generator)
 
     def test_max_count(self):
+        EXPECTED_SIMILAR_POSTS_COUNT = 2
         for article in self.generator.articles:
-            self.assertTrue(len(article.similar_posts) == 2)
+            self.assertTrue(len(article.similar_posts) == EXPECTED_SIMILAR_POSTS_COUNT)
 
 
 class MinScoreSettingTestCase(unittest.TestCase):

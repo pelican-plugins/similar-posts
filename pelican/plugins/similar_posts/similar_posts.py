@@ -1,5 +1,4 @@
-"""
-Similar Posts plugin for Pelican.
+"""Similar Posts plugin for Pelican.
 
 Adds a `similar_posts` list to every article's context.
 """
@@ -16,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def add_similar_posts(generator):
+    """Add similar posts to a Pelican article."""
     max_count = generator.settings.get("SIMILAR_POSTS_MAX_COUNT", 5)
     min_score = generator.settings.get("SIMILAR_POSTS_MIN_SCORE", 0.0001)
 
@@ -79,4 +79,5 @@ def add_similar_posts(generator):
 
 
 def register():
+    """Register the plugin."""
     signals.article_generator_finalized.connect(add_similar_posts)
