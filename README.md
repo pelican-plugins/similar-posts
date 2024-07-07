@@ -3,7 +3,8 @@ Similar Posts: A Plugin for Pelican
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/pelican-plugins/similar-posts/main.yml?branch=main)](https://github.com/pelican-plugins/similar-posts/actions)
 [![PyPI Version](https://img.shields.io/pypi/v/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/)
-![License](https://img.shields.io/pypi/l/pelican-markdown-include?color=blue)
+[![Downloads](https://img.shields.io/pypi/dm/pelican-similar-posts)](https://pypi.org/project/pelican-similar-posts/)
+![License](https://img.shields.io/pypi/l/pelican-similar-posts?color=blue)
 
 **Similar Posts** is a [Pelican](https://getpelican.com/) plugin that adds the `similar_posts` variable to every published article's context.
 
@@ -14,7 +15,7 @@ The `similar_posts` variable is a list of `Article` objects, or an empty list if
 Requirements
 ------------
 
-This plugin requires Python 3.6 or later.
+This plugin is compatible with Python 3.8 through 3.11. Python 3.12+ is not currently supported due to incompatibilities with one or more of the dependencies listed below.
 
 It depends on [Gensim](https://radimrehurek.com/gensim/index.html), which has its own dependencies such as [NumPy](http://www.numpy.org/), [SciPy](https://www.scipy.org/), and [`smart_open`](https://pypi.org/project/smart_open/).
 
@@ -23,8 +24,8 @@ Installation
 
 This plugin can be installed via:
 
-```shell
-python -m pip install pelican-similar-posts
+    python -m pip install pelican-similar-posts
+
 As long as you have not explicitly added a `PLUGINS` setting to your Pelican settings file, then the newly-installed plugin should be automatically detected and enabled. Otherwise, you must add `similar_posts` to your existing `PLUGINS` list. For more information, please see the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
 
 Configuration
@@ -81,3 +82,8 @@ To start contributing to this plugin, review the [Contributing to Pelican][] doc
 
 [existing issues]: https://github.com/pelican-plugins/similar-posts/issues
 [Contributing to Pelican]: https://docs.getpelican.com/en/latest/contribute.html
+
+License
+-------
+
+This project is licensed under the General Public License (GPL) 3.0.

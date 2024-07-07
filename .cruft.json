@@ -1,0 +1,27 @@
+{
+  "template": "https://github.com/getpelican/cookiecutter-pelican-plugin",
+  "commit": "f9a088515d09675d433595982ae643c3fe323c50",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "plugin_name": "Similar Posts",
+      "repo_name": "similar-posts",
+      "package_name": "similar_posts",
+      "distribution_name": "pelican-similar-posts",
+      "version": "1.0.0",
+      "description": "Pelican plugin to add similar posts to articles, based on a vector space model",
+      "authors": "{name = \"David Lesieur\", email = \"david@davidlesieur.com\"}",
+      "keywords": "\"pelican\", \"plugin\", \"similarity\", \"tf-idf\", \"tags\", \"gensim\", \"vector-space-model\", \"algebraic-model\", \"numpy\", \"scipy\"",
+      "readme": "README.md",
+      "contributing": "CONTRIBUTING.md",
+      "license": "GNU General Public License v3|GPL-3.0-only",
+      "repo_url": "https://github.com/pelican-plugins/similar-posts",
+      "dev_status": "5 - Production/Stable",
+      "tests_exist": true,
+      "python_version": ">=3.8.1,<4.0",
+      "pelican_version": ">=4.5",
+      "_template": "https://github.com/getpelican/cookiecutter-pelican-plugin"
+    }
+  },
+  "directory": null
+}
