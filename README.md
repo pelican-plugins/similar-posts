@@ -15,7 +15,7 @@ The `similar_posts` variable is a list of `Article` objects, or an empty list if
 Requirements
 ------------
 
-This plugin is compatible with Python 3.8 through 3.11. Python 3.12+ is not currently supported due to incompatibilities with one or more of the dependencies listed below.
+This plugin is compatible with Python 3.9 through 3.12. Python 3.13+ is not currently supported due to incompatibilities with one or more of the dependencies listed below.
 
 It depends on [Gensim](https://radimrehurek.com/gensim/index.html), which has its own dependencies such as [NumPy](http://www.numpy.org/), [SciPy](https://www.scipy.org/), and [`smart_open`](https://pypi.org/project/smart_open/).
 
